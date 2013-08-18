@@ -10,14 +10,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.logging.Logger;
 
 @Controller
 @RequestMapping("/ivr/api/kookoo")
 public class KooKooController {
+    private Logger logger = Logger.getLogger(this.getClass().getName());
+
     @ResponseBody
     @RequestMapping("/callback")
     private String callback(@ModelAttribute KooKooRequest request, BindingResult bindingResult) {
-        System.out.println("KooKoo request:" + request);
+        logger.info(request.toString());
         if (bindingResult.hasErrors()) return "<response>" +
                                                     "<playtext>Sorry, something went wrong. Please call later.</playtext>" +
                                                     "<hangup/>" +
