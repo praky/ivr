@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <verboice-service>
-    <name>Space shuttle booking center</name>
+    <name>Phone Banking</name>
     <global-settings>
         <variable name="service_domain" display-name="Service Domain" type="string"/>
     </global-settings>
     <steps>
-        <step name="pin-auth-result"
-              display-name="PIN Authentication Results"
+        <step name="authenticate-card"
+              display-name="Authenticate Card"
+              icon="medicalkit"
+              type="callback"
+              callback-url="http://{service_domain}/ivr/api/verboice/authenticate-card">
+            <settings>
+                <variable name="card_number" display-name="Card number" type="string"/>
+            </settings>
+            <response type="variables">
+                <variable name="result" display-name="Result" type="string"/>
+            </response>
+        </step>
+    </steps>
+    <steps>
+        <step name="authenticate-pin"
+              display-name="Authenticate PIN"
               icon="medicalkit"
               type="callback"
               callback-url="http://{service_domain}/ivr/api/verboice/authenticate-pin">
             <settings>
-                <variable name="card-number" display-name="Credit Card number" type="string"/>
-                <variable name="pin" display-name="Credit Card pin" type="string"/>
+                <variable name="card_number" display-name="Card number" type="string"/>
+                <variable name="pin" display-name="Patient pin" type="string"/>
             </settings>
             <response type="variables">
                 <variable name="result" display-name="Result" type="string"/>
