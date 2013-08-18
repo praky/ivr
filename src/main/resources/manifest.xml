@@ -25,12 +25,23 @@
               type="callback"
               callback-url="http://{service_domain}/ivr/api/verboice/authenticate-pin">
             <settings>
-                <variable name="card_number" display-name="Card number" type="string"/>
-                <variable name="pin" display-name="Patient pin" type="string"/>
+                <variable name="pin" display-name="Card PIN" type="string"/>
             </settings>
             <response type="variables">
                 <variable name="result" display-name="Result" type="string"/>
             </response>
+        </step>
+    </steps>
+    <steps>
+        <step name="get-dd-amount"
+              display-name="Get Demand Draft Amount"
+              icon="medicalkit"
+              type="callback"
+              callback-url="http://{service_domain}/ivr/api/verboice/dd-amount">
+            <settings>
+                <variable name="dd_amount" display-name="DD Amount" type="numeric"/>
+            </settings>
+            <response type="none" />
         </step>
     </steps>
 </verboice-service>
