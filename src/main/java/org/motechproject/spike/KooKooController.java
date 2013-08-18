@@ -15,7 +15,7 @@ public class KooKooController {
     @RequestMapping("/callback")
     private String callback() {
         return "<response>" +
-                    "<playtext>IVR, how about U?</playtext>" +
+                    "<playtext>I love India, I love India.</playtext>" +
                     "<hangup/>" +
                 "</response>";
     }
