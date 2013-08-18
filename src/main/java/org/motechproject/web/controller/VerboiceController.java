@@ -1,4 +1,4 @@
-package org.motechproject.spike;
+package org.motechproject.web.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -7,17 +7,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 @Controller
-@RequestMapping("/ivr/api/kookoo")
-public class KooKooController {
+@RequestMapping("/ivr/api/verboice")
+public class VerboiceController {
+
     @ResponseBody
     @RequestMapping("/callback")
     private String callback() {
-        return "<response>" +
-                    "<playtext>I love India, I love India.</playtext>" +
-                    "<hangup/>" +
-                "</response>";
+        return "Complimenti, si sta lavorando! " + new Date();
     }
 
     @RequestMapping("/status")

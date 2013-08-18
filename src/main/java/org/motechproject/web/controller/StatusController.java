@@ -1,4 +1,4 @@
-package org.motechproject.spike;
+package org.motechproject.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
