@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<verboice-service>
+    <name>Space shuttle booking center</name>
+    <global-settings>
+        <variable name="service_domain" display-name="Service Domain" type="string"/>
+    </global-settings>
+    <steps>
+        <step name="pin-auth-result"
+              display-name="PIN Authentication Results"
+              icon="medicalkit"
+              type="callback"
+              callback-url="http://{service_domain}/authenticate-pin">
+            <settings>
+                <variable name="card-number" display-name="Credit Card number" type="string"/>
+                <variable name="pin" display-name="Credit card pin" type="string"/>
+            </settings>
+            <response type="variables">
+                <variable name="result" display-name="Result" type="string"/>
+            </response>
+        </step>
+    </steps>
+</verboice-service>

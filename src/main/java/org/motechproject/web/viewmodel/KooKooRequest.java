@@ -3,6 +3,7 @@ package org.motechproject.web.viewmodel;
 public class KooKooRequest {
     private String sid;
     private String cid;
+    private String cid_type;
     private String called_number;
     private String event;
     private String data;
@@ -29,6 +30,14 @@ public class KooKooRequest {
 
     public void setCid(String cid) {
         this.cid = cid;
+    }
+
+    public String getCid_type() {
+        return cid_type;
+    }
+
+    public void setCid_type(String cid_type) {
+        this.cid_type = cid_type;
     }
 
     public String getCalled_number() {
@@ -124,6 +133,7 @@ public class KooKooRequest {
         return "KooKooRequest{" +
                 "sid='" + sid + '\'' +
                 ", cid='" + cid + '\'' +
+                ", cid_type='" + cid_type + '\'' +
                 ", called_number='" + called_number + '\'' +
                 ", event='" + event + '\'' +
                 ", data='" + data + '\'' +
