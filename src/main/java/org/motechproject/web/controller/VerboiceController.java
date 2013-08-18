@@ -23,9 +23,10 @@ public class VerboiceController {
     @RequestMapping(value = "/authenticate-card", produces = {"application/json"})
     @ResponseBody
     public String authenticateCard(@RequestParam("card_number") long cardNumber) {
-        if (cardNumber == 1234567890123456L) return "{result: true}";
+        logger.info("Card number : " + cardNumber);
+        if (cardNumber == 1234567890123456L) return "{\"result\": \"true\"}";
 
-        return "{result: false}";
+        return "{\"result\": \"false\"}";
     }
 
     @RequestMapping(value = "/authenticate-pin", produces = {"application/json"})
@@ -33,9 +34,9 @@ public class VerboiceController {
     public String authenticatePIN(@RequestParam("pin") int pin) {
         logger.info("PIN : " + pin);
 
-        if (pin == 9999) return "{result: true}";
+        if (pin == 9999) return "{\"result\": \"true\"}";
 
-        return "{result: false}";
+        return "{\"result\": \"false\"}";
     }
 
     @RequestMapping(value = "/dd-amount", produces = {"application/json"})
