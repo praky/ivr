@@ -12,7 +12,7 @@
               callback-url="http://{service_domain}/ivr/api/verboice/authenticate-pin">
             <settings>
                 <variable name="card-number" display-name="Credit Card number" type="string"/>
-                <variable name="pin" display-name="Credit card pin" type="string"/>
+                <variable name="pin" display-name="Credit Card pin" type="string"/>
             </settings>
             <response type="variables">
                 <variable name="result" display-name="Result" type="string"/>

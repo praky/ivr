@@ -12,10 +12,12 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
+import java.util.logging.Logger;
 
 @Controller
 @RequestMapping("/ivr/api/verboice")
 public class VerboiceController {
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     @RequestMapping(value = "/authenticate-pin", produces = {"application/json"})
     @ResponseBody
@@ -32,11 +34,14 @@ public class VerboiceController {
     @RequestMapping(value = "/manifest", produces = {"application/xml"})
     @ResponseBody
     private String manifest() {
-        URL manifest = getClass().getClassLoader().getResource("/manifest.xml");
+        URL manifestUrl = getClass().getClassLoader().getResource("/manifest.xml");
         try {
-            return FileUtils.readFileToString(new File(manifest.getFile()));
+            String manifest = FileUtils.readFileToString(new File(manifestUrl.getFile()), "UTF-8");
+            logger.info("Manifest: " + manifest);
+            return manifest;
         } catch (IOException e) {
-            return "Manifest could not be generated.";
+            logger.severe("Manifest could not be retrieved.");
+            return "Manifest could not retrieved. Please try again later.";
         }
     }
 }
