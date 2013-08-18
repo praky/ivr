@@ -8,11 +8,11 @@ import java.util.Date;
 
 @Controller
 @RequestMapping("/")
-public class TestController {
+public class StatusController {
 
     @ResponseBody
     @RequestMapping("/status")
     private String status() {
-        return "Complimenti, si sta lavorando! " + new Date();
+        return "I am alive and running! " + new Date();
     }
 }

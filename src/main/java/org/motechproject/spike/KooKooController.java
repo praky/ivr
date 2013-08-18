@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 
 @Controller
 @RequestMapping("/ivr/api/kookoo")
@@ -15,7 +14,10 @@ public class KooKooController {
     @ResponseBody
     @RequestMapping("/callback")
     private String callback() {
-        return "Complimenti, si sta lavorando! " + new Date();
+        return "<response>" +
+                    "<playtext>IVR, how about U?</playtext>" +
+                    "<hangup/>" +
+                "</response>";
     }
 
     @RequestMapping("/status")
