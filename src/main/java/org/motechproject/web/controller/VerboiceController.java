@@ -32,7 +32,7 @@ public class VerboiceController {
 
     }
 
-    @RequestMapping("/manifest")
+    @RequestMapping(value = "/manifest", produces = {"application/xml"})
     @ResponseBody
     private String manifest() {
         URL manifest = getClass().getClassLoader().getResource("/manifest.xml");
