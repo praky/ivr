@@ -2,7 +2,7 @@
 <verboice-service>
     <name>Phone Banking</name>
     <global-settings>
-        <variable name="service_domain" display-name="Service Domain" type="string"/>
+        <variable name="service_domain" display-name="Service Domain" type="string" value="xconf-ivr.herokuapp.com"/>
     </global-settings>
     <steps>
         <step name="authenticate-card"
