@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
 
-@Controller@RequestMapping("/")
+@Controller
+@RequestMapping("/")
 public class TestController {
 
     @ResponseBody
