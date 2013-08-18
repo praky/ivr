@@ -8,28 +8,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.Date;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/ivr/api/verboice")
 public class VerboiceController {
 
+    @RequestMapping(value = "/authenticate-pin", produces = {"application/json"})
     @ResponseBody
-    @RequestMapping("/callback")
-    public String callback() {
-        return "Complimenti, si sta lavorando! " + new Date();
+    public String authenticatePIN() {
+        return "{result: ok}";
     }
 
     @RequestMapping("/status")
     @ResponseStatus(HttpStatus.OK)
     public void status(HttpServletRequest request) {
-
+        Map parameterMap = request.getParameterMap();
     }
 
     @RequestMapping(value = "/manifest", produces = {"application/xml"})
