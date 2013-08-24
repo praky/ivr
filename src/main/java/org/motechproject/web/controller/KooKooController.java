@@ -71,12 +71,14 @@ public class KooKooController {
     private String callFlowFor(int callFlowStep, KooKooRequest request) {
         switch (callFlowStep) {
             case 0: {
+                logger.info("Playing welcome message.");
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
                         "<response>" +
                         "<playtext>Welcome to Thought Works phone banking services!</playtext>" +
                         "</response>";
             }
             case 1: {
+                logger.info("Ask for Debit card number.");
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
                         String.format("<response sid='%s'>", request.getSid()) +
                         "<collectdtmf l='16' t='#' o='25000'>" +
@@ -86,6 +88,7 @@ public class KooKooController {
                         "</response>";
             }
             case 2: {
+                logger.info("Ask for PIN number.");
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
                         String.format("<response sid='%s'>", request.getSid()) +
                         "<collectdtmf l='4' t='#' o='20000'>" +
@@ -95,6 +98,7 @@ public class KooKooController {
                         "</response>";
             }
             case 3: {
+                logger.info("Ask for demand draft number.");
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
                         String.format("<response sid='%s'>", request.getSid()) +
                         "<collectdtmf l='10' t='#' o='25000'>" +
@@ -104,6 +108,7 @@ public class KooKooController {
                         "</response>";
             }
             case 4: {
+                logger.info("Tell the demand draft amount and thank the customer.");
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
                         String.format("<response sid='%s'>", request.getSid()) +
                         "<playtext>You entered </playtext>" +
