@@ -79,7 +79,7 @@ public class KooKooController {
             case 1: {
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
                         String.format("<response sid='%s'>", request.getSid()) +
-                        "<collectdtmf l='10' t='#' o='25000'>" +
+                        "<collectdtmf l='16' t='#' o='25000'>" +
                         "<playtext>Please enter your debit card number followed by the # key\n" +
                         "</playtext>" +
                         "</collectdtmf>" +
