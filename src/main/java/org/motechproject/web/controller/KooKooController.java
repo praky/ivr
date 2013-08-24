@@ -85,7 +85,7 @@ public class KooKooController {
                 logger.info("Ask for Debit card number.");
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
                         String.format("<response sid='%s'>", request.getSid()) +
-                        "<collectdtmf l='16' t='#' o='25000'>" +
+                        "<collectdtmf l='16' t='#' o='15000'>" +
                         "<playtext>Please enter your debit card number followed by the # key\n" +
                         "</playtext>" +
                         "</collectdtmf>" +
@@ -95,7 +95,7 @@ public class KooKooController {
                 logger.info("Ask for PIN number.");
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
                         String.format("<response sid='%s'>", request.getSid()) +
-                        "<collectdtmf l='4' t='#' o='10000'>" +
+                        "<collectdtmf l='4' t='#' o='5000'>" +
                         "<playtext>Please enter your debit card PIN number followed by the # key\n" +
                         "</playtext>" +
                         "</collectdtmf>" +
