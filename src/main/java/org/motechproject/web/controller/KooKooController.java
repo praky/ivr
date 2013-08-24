@@ -64,7 +64,7 @@ public class KooKooController {
                     return previousCallFlowStep + 1;
                 }
 
-                return previousCallFlowStep + 1;
+                return previousCallFlowStep;
             }
             default: {
                 return 0;
@@ -95,7 +95,7 @@ public class KooKooController {
                 logger.info("Ask for PIN number.");
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
                         String.format("<response sid='%s'>", request.getSid()) +
-                        "<collectdtmf l='4' t='#' o='20000'>" +
+                        "<collectdtmf l='4' t='#' o='10000'>" +
                         "<playtext>Please enter your debit card PIN number followed by the # key\n" +
                         "</playtext>" +
                         "</collectdtmf>" +
@@ -105,7 +105,7 @@ public class KooKooController {
                 logger.info("Ask for demand draft amount.");
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
                         String.format("<response sid='%s'>", request.getSid()) +
-                        "<collectdtmf l='10' t='#' o='25000'>" +
+                        "<collectdtmf l='10' t='#' o='15000'>" +
                         "<playtext>Please enter the Demand Draft amount followed by the # key\n" +
                         "</playtext>" +
                         "</collectdtmf>" +
