@@ -60,6 +60,10 @@ public class KooKooController {
                 return previousCallFlowStep;
             }
             case 3: {
+                if (isValidDDAmount(request)) {
+                    return previousCallFlowStep + 1;
+                }
+
                 return previousCallFlowStep + 1;
             }
             default: {
@@ -98,7 +102,7 @@ public class KooKooController {
                         "</response>";
             }
             case 3: {
-                logger.info("Ask for demand draft number.");
+                logger.info("Ask for demand draft amount.");
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
                         String.format("<response sid='%s'>", request.getSid()) +
                         "<collectdtmf l='10' t='#' o='25000'>" +
@@ -139,5 +143,15 @@ public class KooKooController {
 
     private boolean isValidPIN(KooKooRequest request) {
         return "9999".equals(request.getData());
+    }
+
+    private boolean isValidDDAmount(KooKooRequest request) {
+        try {
+            final long ddAmount = Long.parseLong(request.getData());
+            if (ddAmount > 0) return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return false;
     }
 }
