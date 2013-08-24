@@ -107,7 +107,7 @@ public class KooKooController {
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
                         String.format("<response sid='%s'>", request.getSid()) +
                         "<playtext>You entered </playtext>" +
-                        String.format("<say-as format='402' lang='EN'>%s</say-as>", request.getData()) +
+                        String.format("<say-as format='401' lang='EN'>%s</say-as>", request.getData()) +
                         "<playtext>Your Demand Draft will be delivered in three working days. Thank you for choosing Thought Works phone banking services!</playtext>" +
                         "<hangup />" +
                         "</response>";
