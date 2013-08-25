@@ -14,30 +14,50 @@ import java.util.logging.Logger;
 @Controller
 @RequestMapping("/ivr/api/kookoo")
 public class KooKooController {
-    private static Map<String, Integer> callflow = new HashMap<>();
+    private static Map<String, Integer> callSidToCallFlowStepMap = new HashMap<>();
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
     @ResponseBody
     @RequestMapping("/callback")
     private String callback(@ModelAttribute KooKooRequest request, BindingResult bindingResult) {
-        logger.info(request.toString());
+        logRequest(request);
 
         if (bindingResult.hasErrors()) return playError();
 
         int previousCallFlowStep = -1;
 
-        if (callflow.get(request.getSid()) != null) {
-            previousCallFlowStep = callflow.get(request.getSid());
+        if (callSidToCallFlowStepMap.get(request.getSid()) != null) {
+            previousCallFlowStep = callSidToCallFlowStepMap.get(request.getSid());
         }
 
         logger.info("Previous callflow step " + previousCallFlowStep);
 
         final int nextCallFlowStep = nextCallFlowStep(request, previousCallFlowStep);
-        callflow.put(request.getSid(), nextCallFlowStep);
+        callSidToCallFlowStepMap.put(request.getSid(), nextCallFlowStep);
 
         logger.info("Next callflow step " + nextCallFlowStep);
 
-        return callFlowFor(nextCallFlowStep, request);
+        final String callFlow = callFlowFor(nextCallFlowStep, request);
+        logCallFlow(callFlow);
+        return callFlow;
+    }
+
+    private void logCallFlow(String callFlow) {
+        logger.info("\n\n");
+        logger.info("=================================================================================================");
+        logger.info("                Printing the KooKoo tunes / callflow xml being returned.");
+        logger.info("=================================================================================================");
+        logger.info(callFlow);
+        logger.info("\n\n");
+    }
+
+    private void logRequest(KooKooRequest request) {
+        logger.info("\n\n");
+        logger.info("=================================================================================================");
+        logger.info("                Printing the KooKoo request details received.");
+        logger.info("=================================================================================================");
+        logger.info(request.toString());
+        logger.info("\n\n");
     }
 
     private int nextCallFlowStep(KooKooRequest request, int previousCallFlowStep) {
