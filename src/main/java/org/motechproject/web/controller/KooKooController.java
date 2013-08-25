@@ -78,63 +78,65 @@ public class KooKooController {
                 logger.info("Playing welcome message.");
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
                         "<response>" +
-                        "<playtext>Welcome to Thought Works phone banking services!</playtext>" +
+                            "<playtext>Welcome to Thought Works phone banking services!</playtext>" +
                         "</response>";
             }
             case 1: {
                 logger.info("Ask for Debit card number.");
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
                         String.format("<response sid='%s'>", request.getSid()) +
-                        "<collectdtmf l='16' t='#' o='15000'>" +
-                        "<playtext>Please enter your debit card number followed by the # key\n" +
-                        "</playtext>" +
-                        "</collectdtmf>" +
-                        "</response>";
+                                            "<collectdtmf l='16' t='#' o='15000'>" +
+                                                "<playtext>Please enter your debit card number followed by the # key\n" +
+                                                "</playtext>" +
+                                            "</collectdtmf>" +
+                                    "</response>";
             }
             case 2: {
                 logger.info("Ask for PIN number.");
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
                         String.format("<response sid='%s'>", request.getSid()) +
-                        "<collectdtmf l='4' t='#' o='5000'>" +
-                        "<playtext>Please enter your debit card PIN number followed by the # key\n" +
-                        "</playtext>" +
-                        "</collectdtmf>" +
-                        "</response>";
+                                            "<collectdtmf l='4' t='#' o='5000'>" +
+                                                "<playtext>Please enter your debit card PIN number followed by the # key\n" +
+                                                "</playtext>" +
+                                            "</collectdtmf>" +
+                                        "</response>";
             }
             case 3: {
                 logger.info("Ask for demand draft amount.");
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
                         String.format("<response sid='%s'>", request.getSid()) +
-                        "<collectdtmf l='10' t='#' o='15000'>" +
-                        "<playtext>Please enter the Demand Draft amount followed by the # key\n" +
-                        "</playtext>" +
-                        "</collectdtmf>" +
-                        "</response>";
+                                            "<collectdtmf l='10' t='#' o='15000'>" +
+                                                "<playtext>Please enter the Demand Draft amount followed by the # key\n" +
+                                                "</playtext>" +
+                                            "</collectdtmf>" +
+                                        "</response>";
             }
             case 4: {
                 logger.info("Tell the demand draft amount and thank the customer.");
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
                         String.format("<response sid='%s'>", request.getSid()) +
-                        "<playtext>You have entered </playtext>" +
-                        String.format("<say-as format='401' lang='EN'>%s</say-as>", request.getData()) +
-                        "<playtext>Your Demand Draft will be delivered in three working days. Thank you for choosing Thought Works phone banking services!</playtext>" +
-                        "<sendsms to='7760972094'>Your Demand Draft will be delivered in three working days. Your transaction reference number is 123456. Thank you for choosing Thought Works phone banking services!</sendsms>" +
-                        "<hangup />" +
-                        "</response>";
+                                            "<playtext>You have entered </playtext>" +
+                                                String.format("<say-as format='401' lang='EN'>%s</say-as>", request.getData()) +
+                                            "<playtext>Your Demand Draft will be delivered in three working days. Thank you for choosing Thought Works phone banking services!</playtext>" +
+                                            String.format("<sendsms to='%s'>", request.getCid()) +
+                                                    "Your DD will be delivered in three working days. Transaction reference number: 123456. Thank you" +
+                                            "</sendsms>" +
+                                            "<hangup />" +
+                                    "</response>";
             }
             default: {
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
                         String.format("<response sid='%s'>", request.getSid()) +
-                        "<playtext>Welcome to Thought Works phone banking services!</playtext>" +
-                        "</response>";
+                                            "<playtext>Welcome to Thought Works phone banking services!</playtext>" +
+                                        "</response>";
             }
         }
     }
 
     private String playError() {
         return "<response>" +
-                "<playtext>Sorry, something went wrong. Please call later.</playtext>" +
-                "<hangup/>" +
+                    "<playtext>Sorry, something went wrong. Please call later.</playtext>" +
+                    "<hangup/>" +
                 "</response>";
     }
 
