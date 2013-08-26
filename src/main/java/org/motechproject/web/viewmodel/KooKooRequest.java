@@ -131,7 +131,7 @@ public class KooKooRequest {
     @Override
     public String toString() {
         return "KooKooRequest{" +
-                "sid='" + sid + '\'' +
+                " sid='" + sid + '\'' +
                 ", cid='" + cid + '\'' +
                 ", cid_type='" + cid_type + '\'' +
                 ", called_number='" + called_number + '\'' +

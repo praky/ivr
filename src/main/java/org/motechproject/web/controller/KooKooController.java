@@ -138,7 +138,7 @@ public class KooKooController {
                                             "<playtext>You have entered </playtext>" +
                                                 String.format("<say-as format='401' lang='EN'>%s</say-as>", request.getData()) +
                                             "<playtext>Your Demand Draft will be delivered in three working days. Thank you for choosing Thought Works phone banking services!</playtext>" +
-                                            String.format("<sendsms to='%s'>", request.getCid()) +
+                                            String.format("<sendsms to='91%s'>", request.getCid()) +
                                                     "Your DD will be delivered in three working days. Transaction reference number: 123456. Thank you" +
                                             "</sendsms>" +
                                             "<hangup />" +
