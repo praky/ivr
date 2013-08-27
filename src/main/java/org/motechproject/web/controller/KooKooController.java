@@ -44,22 +44,20 @@ public class KooKooController {
 
     private void logCallFlow(String callFlow) {
         logger.info("\n\n");
-        logger.info(String.format("%s\n%s\n%s",
+        logger.info(String.format("%s\n%s\n%s\n\n",
                                     "===================================================================",
-                                    "\nPrinting the KooKoo tunes / callflow xml being returned.",
+                                    "    Printing the KooKoo tunes / callflow xml being returned.",
                                     "==================================================================="));
         logger.info(callFlow);
-        logger.info("\n");
     }
 
     private void logRequest(KooKooRequest request) {
         logger.info("\n\n");
-        logger.info(String.format("%s\n%s\n%s",
+        logger.info(String.format("%s\n%s\n%s\n\n",
                                  "==============================================",
-                                 "\nPrinting the KooKoo http request.",
+                                 "   Printing the KooKoo http request.",
                                  "=============================================="));
         logger.info(request.toString());
-        logger.info("\n");
     }
 
     private int nextCallFlowStep(KooKooRequest request, int previousCallFlowStep) {
@@ -100,65 +98,62 @@ public class KooKooController {
                 logger.info("Playing welcome message.");
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
                         "<response>" +
-                            "<playtext>Welcome to Thought Works phone banking services!</playtext>" +
+                            "\n  <playtext>Welcome to Thought Works phone banking services!</playtext>" +
                         "</response>";
             }
             case 1: {
                 logger.info("Ask for Debit card number.");
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
                         String.format("<response sid='%s'>", request.getSid()) +
-                                            "<collectdtmf l='16' t='#' o='15000'>" +
-                                                "<playtext>Please enter your debit card number followed by the # key\n" +
-                                                "</playtext>" +
-                                            "</collectdtmf>" +
+                                       "\n  <collectdtmf l='16' t='#' o='15000'>" +
+                                       "\n      <playtext>Please enter your debit card number followed by the # key</playtext>" +
+                                       "\n  </collectdtmf>" +
                                     "</response>";
             }
             case 2: {
                 logger.info("Ask for PIN number.");
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
                         String.format("<response sid='%s'>", request.getSid()) +
-                                            "<collectdtmf l='4' t='#' o='5000'>" +
-                                                "<playtext>Please enter your debit card PIN number followed by the # key\n" +
-                                                "</playtext>" +
-                                            "</collectdtmf>" +
+                                            "\n  <collectdtmf l='4' t='#' o='5000'>" +
+                                            "\n     <playtext>Please enter your debit card PIN number followed by the # key</playtext>" +
+                                            "\n  </collectdtmf>" +
                                         "</response>";
             }
             case 3: {
                 logger.info("Ask for demand draft amount.");
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
                         String.format("<response sid='%s'>", request.getSid()) +
-                                            "<collectdtmf l='10' t='#' o='15000'>" +
-                                                "<playtext>Please enter the Demand Draft amount followed by the # key\n" +
-                                                "</playtext>" +
-                                            "</collectdtmf>" +
+                                            "\n  <collectdtmf l='10' t='#' o='15000'>" +
+                                            "\n     <playtext>Please enter the Demand Draft amount followed by the # key</playtext>" +
+                                            "\n  </collectdtmf>" +
                                         "</response>";
             }
             case 4: {
                 logger.info("Tell the demand draft amount and thank the customer.");
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
                         String.format("<response sid='%s'>", request.getSid()) +
-                                            "<playtext>You have entered </playtext>" +
-                                                String.format("<say-as format='401' lang='EN'>%s</say-as>", request.getData()) +
-                                            "<playtext>Your Demand Draft will be delivered in three working days. Thank you for choosing Thought Works phone banking services!</playtext>" +
-                                            String.format("<sendsms to='91%s'>", request.getCid()) +
+                                            "\n  <playtext>You have entered </playtext>" +
+                                            String.format("\n  <say-as format='401' lang='EN'>%s</say-as>", request.getData()) +
+                                            "\n  <playtext>Your Demand Draft will be delivered in three working days. Thank you for choosing Thought Works phone banking services!</playtext>" +
+                                            String.format("\n  <sendsms to='91%s'>", request.getCid()) +
                                                     "Your DD will be delivered in three working days. Transaction reference number: 123456. Thank you" +
-                                            "</sendsms>" +
-                                            "<hangup />" +
+                                            "\n  </sendsms>" +
+                                            "\n  <hangup />" +
                                     "</response>";
             }
             default: {
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
                         String.format("<response sid='%s'>", request.getSid()) +
-                                            "<playtext>Welcome to Thought Works phone banking services!</playtext>" +
-                                        "</response>";
+                                       "\n  <playtext>Welcome to Thought Works phone banking services!</playtext>" +
+                                       "</response>";
             }
         }
     }
 
     private String playError() {
         return "<response>" +
-                    "<playtext>Sorry, something went wrong. Please call later.</playtext>" +
-                    "<hangup/>" +
+                    "\n<playtext>Sorry, something went wrong. Please call later.</playtext>" +
+                    "\n<hangup/>" +
                 "</response>";
     }
 

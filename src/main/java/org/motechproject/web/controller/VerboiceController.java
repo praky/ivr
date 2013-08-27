@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -55,15 +54,15 @@ public class VerboiceController {
                 "\nPrinting the verboice call status callback parameters.",
                 "====================================================="));
 
-        Map parameterMap = request.getParameterMap();
-        String msg = "Call Status callback parameters =>";
-        final Set<Map.Entry> statusCallbackParams = parameterMap.entrySet();
-        for (Map.Entry entry : statusCallbackParams) {
-            msg += String.format("\t\n%s = '%s'", entry.getKey(), entry.getValue());
+        Set<String> paramNames = request.getParameterMap().keySet();
+        String msg = "\nCall Status callback parameters =>";
+        for (String paramName : paramNames) {
+            msg += String.format("\n    %s = '%s'", paramName, request.getParameter(paramName));
         }
 
+        msg += "\n";
+
         logger.info(msg);
-        logger.info("\n");
     }
 
     @RequestMapping(value = "/manifest", produces = {"application/xml"})
