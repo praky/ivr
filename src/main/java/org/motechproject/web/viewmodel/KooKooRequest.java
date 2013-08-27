@@ -130,21 +130,16 @@ public class KooKooRequest {
 
     @Override
     public String toString() {
-        return "KooKooRequest{" +
-                " sid='" + sid + '\'' +
-                ", cid='" + cid + '\'' +
-                ", cid_type='" + cid_type + '\'' +
-                ", called_number='" + called_number + '\'' +
-                ", event='" + event + '\'' +
-                ", data='" + data + '\'' +
-                ", status='" + status + '\'' +
-                ", callduration='" + callduration + '\'' +
-                ", record_duration='" + record_duration + '\'' +
-                ", total_call_duration='" + total_call_duration + '\'' +
-                ", process='" + process + '\'' +
-                ", outbound_sid='" + outbound_sid + '\'' +
-                ", circle='" + circle + '\'' +
-                ", operator='" + operator + '\'' +
-                '}';
+        return "KooKooRequest =>" +
+                "\t\nSession Id = '" + sid + '\'' +
+                "\t\nCaller Id = '" + cid + '\'' +
+                "\t\nCalled Number = '" + called_number + '\'' +
+                "\t\nEvent = '" + event + '\'' +
+                "\t\nData = '" + data + '\'' +
+                "\t\nStatus = '" + status + '\'' +
+                "\t\nTotal Call Duration = '" + total_call_duration + '\'' +
+                "\t\nProcess = '" + process + '\'' +
+                "\t\nCircle = '" + circle + '\'' +
+                "\t\nOperator = '" + operator + '\'';
     }
 }

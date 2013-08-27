@@ -7,11 +7,11 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:app-context.xml</param-value>
+        <param-value>classpath:application-context.xml</param-value>
     </context-param>
-
 
     <servlet>
         <servlet-name>app-servlet</servlet-name>
@@ -27,5 +27,4 @@
         <servlet-name>app-servlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-
 </web-app>

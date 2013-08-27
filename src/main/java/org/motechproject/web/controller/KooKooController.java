@@ -44,20 +44,22 @@ public class KooKooController {
 
     private void logCallFlow(String callFlow) {
         logger.info("\n\n");
-        logger.info("=================================================================================================");
-        logger.info("                Printing the KooKoo tunes / callflow xml being returned.");
-        logger.info("=================================================================================================");
+        logger.info(String.format("%s\n%s\n%s",
+                                    "===================================================================",
+                                    "\nPrinting the KooKoo tunes / callflow xml being returned.",
+                                    "==================================================================="));
         logger.info(callFlow);
-        logger.info("\n\n");
+        logger.info("\n");
     }
 
     private void logRequest(KooKooRequest request) {
         logger.info("\n\n");
-        logger.info("=================================================================================================");
-        logger.info("                Printing the KooKoo request details received.");
-        logger.info("=================================================================================================");
+        logger.info(String.format("%s\n%s\n%s",
+                                 "==============================================",
+                                 "\nPrinting the KooKoo http request.",
+                                 "=============================================="));
         logger.info(request.toString());
-        logger.info("\n\n");
+        logger.info("\n");
     }
 
     private int nextCallFlowStep(KooKooRequest request, int previousCallFlowStep) {

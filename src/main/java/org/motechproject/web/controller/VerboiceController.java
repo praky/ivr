@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Logger;
 
 @Controller
@@ -48,8 +49,21 @@ public class VerboiceController {
     @RequestMapping("/status")
     @ResponseStatus(HttpStatus.OK)
     public void status(HttpServletRequest request) {
+        logger.info("\n\n");
+        logger.info(String.format("%s\n%s\n%s",
+                "=====================================================",
+                "\nPrinting the verboice call status callback parameters.",
+                "====================================================="));
+
         Map parameterMap = request.getParameterMap();
-        logger.info("Status request parameters : " + parameterMap);
+        String msg = "Call Status callback parameters =>";
+        final Set<Map.Entry> statusCallbackParams = parameterMap.entrySet();
+        for (Map.Entry entry : statusCallbackParams) {
+            msg += String.format("\t\n%s = '%s'", entry.getKey(), entry.getValue());
+        }
+
+        logger.info(msg);
+        logger.info("\n");
     }
 
     @RequestMapping(value = "/manifest", produces = {"application/xml"})
