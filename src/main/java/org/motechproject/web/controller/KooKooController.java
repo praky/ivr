@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 @RequestMapping("/ivr/api/kookoo")
 public class KooKooController {
     public static final String EVENT_HANGUP = "Hangup";
+    public static final String EVENT_DISCONNECT = "Disconnect";
     private static Map<String, Integer> callSidToCallFlowStepMap = new HashMap<>();
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
@@ -25,7 +26,7 @@ public class KooKooController {
 
         logRequest(request);
 
-        if (EVENT_HANGUP.equals(request.getEvent())) return "";
+        if (EVENT_HANGUP.equalsIgnoreCase(request.getEvent()) || EVENT_DISCONNECT.equalsIgnoreCase(request.getEvent())) return "";
 
         int previousCallFlowStep = -1;
 
