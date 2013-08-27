@@ -23,7 +23,7 @@ public class VerboiceController {
     @RequestMapping(value = "/authenticate-card", produces = {"application/json"})
     @ResponseBody
     public String authenticateCard(@RequestParam("card_number") long cardNumber) {
-        logger.info(String.format("\nCard number : %s\n", cardNumber));
+        logger.info(String.format("\n============ Card number : %s ============\n", cardNumber));
         if (cardNumber == 1234567890123456L) return "{\"result\": \"true\"}";
 
         return "{\"result\": \"false\"}";
@@ -32,7 +32,7 @@ public class VerboiceController {
     @RequestMapping(value = "/authenticate-pin", produces = {"application/json"})
     @ResponseBody
     public String authenticatePIN(@RequestParam("pin") int pin) {
-        logger.info(String.format("\nPIN : %s\n", pin));
+        logger.info(String.format("\n============ PIN : %s ============\n", pin));
 
         if (pin == 9999) return "{\"result\": \"true\"}";
 
@@ -42,16 +42,16 @@ public class VerboiceController {
     @RequestMapping(value = "/dd-amount", produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
     public void dd(@RequestParam("dd_amount") String ddAmount) {
-        logger.info(String.format("\nDemand draft amount : %s\n", ddAmount));
+        logger.info(String.format("\n============ Demand draft amount : %s ============\n", ddAmount));
     }
 
     @RequestMapping("/status")
     @ResponseStatus(HttpStatus.OK)
     public void status(HttpServletRequest request) {
         logger.info(String.format("\n%s\n%s\n%s",
-                "=====================================================",
-                "\nPrinting the verboice call status callback parameters.",
-                "====================================================="));
+                "========================================================",
+                "  Printing the verboice call status callback parameters.",
+                "========================================================"));
 
         Set<String> paramNames = request.getParameterMap().keySet();
         String msg = "\nCall Status callback parameters =>";
