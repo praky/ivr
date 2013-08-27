@@ -14,15 +14,18 @@ import java.util.logging.Logger;
 @Controller
 @RequestMapping("/ivr/api/kookoo")
 public class KooKooController {
+    public static final String EVENT_HANGUP = "Hangup";
     private static Map<String, Integer> callSidToCallFlowStepMap = new HashMap<>();
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
     @ResponseBody
     @RequestMapping("/callback")
     private String callback(@ModelAttribute KooKooRequest request, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) return playError();
+
         logRequest(request);
 
-        if (bindingResult.hasErrors()) return playError();
+        if (EVENT_HANGUP.equals(request.getEvent())) return "";
 
         int previousCallFlowStep = -1;
 
@@ -44,20 +47,20 @@ public class KooKooController {
 
     private void logCallFlow(String callFlow) {
         logger.info("\n\n");
-        logger.info(String.format("%s\n%s\n%s\n\n",
+        logger.info(String.format("\n%s\n%s\n%s\n%s\n",
                                     "===================================================================",
                                     "    Printing the KooKoo tunes / callflow xml being returned.",
-                                    "==================================================================="));
-        logger.info(callFlow);
+                                    "===================================================================",
+                                    callFlow));
     }
 
     private void logRequest(KooKooRequest request) {
         logger.info("\n\n");
-        logger.info(String.format("%s\n%s\n%s\n\n",
-                                 "==============================================",
-                                 "   Printing the KooKoo http request.",
-                                 "=============================================="));
-        logger.info(request.toString());
+        logger.info(String.format("\n%s\n%s\n%s\n%s\n",
+                "==============================================",
+                "   Printing the KooKoo http request.",
+                "==============================================",
+                request.toString()));
     }
 
     private int nextCallFlowStep(KooKooRequest request, int previousCallFlowStep) {
@@ -97,41 +100,41 @@ public class KooKooController {
             case 0: {
                 logger.info("Playing welcome message.");
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
-                        "<response>" +
+                        "\n<response>" +
                             "\n  <playtext>Welcome to Thought Works phone banking services!</playtext>" +
-                        "</response>";
+                        "\n</response>";
             }
             case 1: {
                 logger.info("Ask for Debit card number.");
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
-                        String.format("<response sid='%s'>", request.getSid()) +
+                        String.format("\n<response sid='%s'>", request.getSid()) +
                                        "\n  <collectdtmf l='16' t='#' o='15000'>" +
                                        "\n      <playtext>Please enter your debit card number followed by the # key</playtext>" +
                                        "\n  </collectdtmf>" +
-                                    "</response>";
+                                    "\n</response>";
             }
             case 2: {
                 logger.info("Ask for PIN number.");
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
-                        String.format("<response sid='%s'>", request.getSid()) +
+                        String.format("\n<response sid='%s'>", request.getSid()) +
                                             "\n  <collectdtmf l='4' t='#' o='5000'>" +
                                             "\n     <playtext>Please enter your debit card PIN number followed by the # key</playtext>" +
                                             "\n  </collectdtmf>" +
-                                        "</response>";
+                                        "\n</response>";
             }
             case 3: {
                 logger.info("Ask for demand draft amount.");
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
-                        String.format("<response sid='%s'>", request.getSid()) +
+                        String.format("\n<response sid='%s'>", request.getSid()) +
                                             "\n  <collectdtmf l='10' t='#' o='15000'>" +
                                             "\n     <playtext>Please enter the Demand Draft amount followed by the # key</playtext>" +
                                             "\n  </collectdtmf>" +
-                                        "</response>";
+                                        "\n</response>";
             }
             case 4: {
                 logger.info("Tell the demand draft amount and thank the customer.");
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
-                        String.format("<response sid='%s'>", request.getSid()) +
+                        String.format("\n<response sid='%s'>", request.getSid()) +
                                             "\n  <playtext>You have entered </playtext>" +
                                             String.format("\n  <say-as format='401' lang='EN'>%s</say-as>", request.getData()) +
                                             "\n  <playtext>Your Demand Draft will be delivered in three working days. Thank you for choosing Thought Works phone banking services!</playtext>" +
@@ -139,22 +142,23 @@ public class KooKooController {
                                                     "Your DD will be delivered in three working days. Transaction reference number: 123456. Thank you" +
                                             "\n  </sendsms>" +
                                             "\n  <hangup />" +
-                                    "</response>";
+                                    "\n</response>";
             }
             default: {
                 return "<?xml version='1.0' encoding='UTF-8'?>" +
-                        String.format("<response sid='%s'>", request.getSid()) +
+                        String.format("\n<response sid='%s'>", request.getSid()) +
                                        "\n  <playtext>Welcome to Thought Works phone banking services!</playtext>" +
-                                       "</response>";
+                                       "\n</response>";
             }
         }
     }
 
     private String playError() {
-        return "<response>" +
+        return  "<?xml version='1.0' encoding='UTF-8'?>" +
+                "\n<response>" +
                     "\n<playtext>Sorry, something went wrong. Please call later.</playtext>" +
                     "\n<hangup/>" +
-                "</response>";
+                "\n</response>";
     }
 
     private boolean isValidDebitCard(KooKooRequest request) {
