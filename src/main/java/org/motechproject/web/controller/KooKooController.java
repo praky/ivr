@@ -1,14 +1,18 @@
 package org.motechproject.web.controller;
 
 import org.motechproject.web.viewmodel.KooKooRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Logger;
 
 @Controller
@@ -47,6 +51,25 @@ public class KooKooController {
         final String callFlow = callFlowFor(nextCallFlowStep, request);
         logCallFlow(callFlow);
         return callFlow;
+    }
+
+    @RequestMapping("/status")
+    @ResponseStatus(HttpStatus.OK)
+    public void status(HttpServletRequest request) {
+        logger.info(String.format("\n%s\n%s\n%s",
+                "========================================================",
+                "  Printing the KooKoo call status callback parameters.",
+                "========================================================"));
+
+        Set<String> paramNames = request.getParameterMap().keySet();
+        String msg = "\nCall Status callback parameters =>";
+        for (String paramName : paramNames) {
+            msg += String.format("\n    %s = '%s'", paramName, request.getParameter(paramName));
+        }
+
+        msg += "\n";
+
+        logger.info(msg);
     }
 
     private void logCallFlow(String callFlow) {
