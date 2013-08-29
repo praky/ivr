@@ -26,7 +26,10 @@ public class KooKooController {
 
         logRequest(request);
 
-        if (EVENT_HANGUP.equalsIgnoreCase(request.getEvent()) || EVENT_DISCONNECT.equalsIgnoreCase(request.getEvent())) return "";
+        if (EVENT_HANGUP.equalsIgnoreCase(request.getEvent()) || EVENT_DISCONNECT.equalsIgnoreCase(request.getEvent())) {
+            callSidToCallFlowStepMap.remove(request.getSid());
+            return "";
+        }
 
         int previousCallFlowStep = -1;
 
